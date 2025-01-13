@@ -14,7 +14,7 @@ datasource db {
 model User {
   id       Int       @id @default(autoincrement())
   passwordHash String
-  email        String
+  email        String 
   
   sessions Session[]
 }

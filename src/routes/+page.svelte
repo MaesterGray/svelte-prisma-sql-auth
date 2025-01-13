@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { enhance } from "$app/forms";
+
     let email = $state('');
     let password = $state('');
     let confirmPassword = $state('');
-  
+    let isLoading = $state(false)
     
   </script>
   
@@ -11,7 +13,18 @@
       <div>
         <h2 class="mt-6 text-center text-3xl font-bold text-gray-900">Create your account</h2>
       </div>
-      <form class="mt-8 space-y-6" >
+      <form class="mt-8 space-y-6" 
+      method="post" 
+      action="?/signUp" 
+      use:enhance={
+        ()=>{
+          isLoading = true
+          return async({update})=>{
+            await update()
+            isLoading = false
+          }
+        }
+      }>
         <div class="rounded-md shadow-sm space-y-4">
           <div>
             <label for="email" class="sr-only">Email address</label>
@@ -56,7 +69,7 @@
             type="submit"
             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Sign up
+            {isLoading?'Signing Up...':'Sign Up'}
           </button>
         </div>
       </form>

@@ -1,7 +1,23 @@
 <script lang="ts">
     let email = $state('');
     let password = $state('');
-  
+    let {form,data} = $props()
+
+  if (form) {
+    if (form.message==='failed') {
+        switch (form.reason) {
+          case 'password or email incorrect':
+            alert('Password or email incorrect')
+            break;
+            case 'user does not exist':
+              alert('The user does not exist')
+            break;
+          default:
+            break;
+        }
+    }
+  }
+    
     
   </script>
   
@@ -10,7 +26,7 @@
       <div>
         <h2 class="mt-6 text-center text-3xl font-bold text-gray-900">Sign in to your account</h2>
       </div>
-      <form class="mt-8 space-y-6" >
+      <form class="mt-8 space-y-6" action="?/login" method="post" >
         <div class="rounded-md shadow-sm space-y-4">
           <div>
             <label for="email" class="sr-only">Email address</label>
